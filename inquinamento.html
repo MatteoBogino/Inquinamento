@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" name="viewport" content="width=device-width"/>
+        <title>Aria Pulita</title>
+        <link rel="stylesheet" href="inquinamento.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+    <body>
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/it_IT/sdk.js#xfbml=1&version=v11.0" nonce="kAeM3wwE"></script>
+        <header>
+            <h1>A. P. I.</h1>
+            <h2>Aria Pulita per l'Italia</h2>
+        </header>
+        <article>
+            <div class="spiega">Per un aria più pulita e per permette di tenere sotto controllo<br/>
+                    i livelli di inquinamento nell'aria questo sito riporta i dati in tempo reale.<br/>
+                    Di seguito troverai le maggiori città italiane, se non ci dovesse essere la tua prova a cercarla!</div>
+            <div class="freccia">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+                </svg>
+            </div>
+            <div class="input-group mb-3 center">
+                <div class="barra-cerca">
+                    <input type="text" class="form-control" placeholder="Trova la tua città" aria-label="Recipient's username" aria-describedby="basic-addon2" id="city">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-primary" type="button" id="cerca">Cerca</button>
+                      <div class="content" id="find">
+                        <div class="cambiacli">.</div>
+                        <div class="dati">
+                            Data e ora (ultima rilevazione):
+                            <p id="data-search-time"></p>
+                            Indice di Qualità dell'Aria (AQI):
+                            <p id="data-search-aqi"></p>
+                            Livello Biossido di Azoto:
+                            <p id="data-search-iaqi"></p>
+                            Polveri grossolane:
+                            <p id="data-search-pm10"></p>
+                            Polveri fini:
+                            <p id="data-search-pm25"></p>
+                            Temperatura:
+                            <p id="data-search-t"></p>
+                            Pressione:
+                            <p id="data-search-p"></p>
+                            Umidità:
+                            <p id="data-search-h"></p>
+                            Vento:
+                            <p id="data-search-w"></p>
+                        </div>
+                        <button class="chiusura" id="findc"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                          </svg></button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tutte-citta">
+                <div class="città">
+                    <div class="foto-roma">
+                        <div class="roma"><strong>Roma</strong><br/>
+                            <button type="button" class="collapsible" id="collapsible"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                            </svg></button>
+                            <div class="content" id="content">
+                                <div class="cambiacli">.</div>
+                                <div class="dati">
+                                    <div>
+                                        <canvas id="myChart"></canvas>
+                                    </div>
+                                    Data e ora (ultima rilevazione):
+                                    <p id="data-roma-time"></p>
+                                    Indice di Qualità dell'Aria (AQI):
+                                    <p id="data-roma-aqi"></p>
+                                    Livello Biossido di Azoto:
+                                    <p id="data-roma-iaqi"></p>
+                                    Polveri grossolane:
+                                    <p id="data-roma-pm10"></p>
+                                    Polveri fini:
+                                    <p id="data-roma-pm25"></p>
+                                    Temperatura:
+                                    <p id="data-roma-t"></p>
+                                    Pressione:
+                                    <p id="data-roma-p"></p>
+                                    Umidità:
+                                    <p id="data-roma-h"></p>
+                                    Vento:
+                                    <p id="data-roma-w"></p>
+                                <button class="chiusura" id="chiusura"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                  </svg></button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="foto-milano">
+                        <div class="milano"><strong>Milano</strong><br/>
+                            <button type="button" class="collapsible"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                            </svg></button>
+                            <div class="content" id="conten">
+                                <div class="cambiacli">.</div>
+                                <div class="dati">
+                                    Data e ora (ultima rilevazione):
+                                    <p id="data-milano-time"></p>
+                                    Indice di Qualità dell'Aria (AQI):
+                                    <p id="data-milano-aqi"></p>
+                                    Livello Biossido di Azoto:
+                                    <p id="data-milano-iaqi"></p>
+                                    Polveri grossolane:
+                                    <p id="data-milano-pm10"></p>
+                                    Polveri fini:
+                                    <p id="data-milano-pm25"></p>
+                                    Temperatura:
+                                    <p id="data-milano-t"></p>
+                                    Pressione:
+                                    <p id="data-milano-p"></p>
+                                    Umidità:
+                                    <p id="data-milano-h"></p>
+                                    Vento:
+                                    <p id="data-milano-w"></p>
+                                </div>
+                                <button class="chiusura" id="chiusur"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                  </svg></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>            
+                <div class="città">
+                    <div class="foto-napoli">
+                        <div class="napoli"><strong>Napoli</strong><br/>
+                            <button type="button" class="collapsible"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                            </svg></button>
+                            <div class="content" id="con">
+                                <div class="cambiacli">.</div>
+                                <div class="dati">
+                                Data e ora (ultima rilevazione):
+                                <p id="data-napoli-time"></p>
+                                Indice di Qualità dell'Aria (AQI):
+                                <p id="data-napoli-aqi"></p>
+                                Livello Biossido di Azoto:
+                                <p id="data-napoli-iaqi"></p>
+                                Polveri grossolane:
+                                <p id="data-napoli-pm10"></p>
+                                Polveri fini:
+                                <p id="data-napoli-pm25"></p>
+                                Temperatura:
+                                <p id="data-napoli-t"></p>
+                                Pressione:
+                                <p id="data-napoli-p"></p>
+                                Umidità:
+                                <p id="data-napoli-h"></p>
+                                Vento:
+                                <p id="data-napoli-w"></p>
+                            </div>
+                                <button class="chiusura" id="chiu"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                  </svg></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="foto-firenze">
+                        <div class="firenze"><strong>Firenze</strong><br/>
+                            <button type="button" class="collapsible"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                            </svg></button>
+                            <div class="content" id="co">
+                                <div class="cambiacli">.</div>
+                                <div class="dati">
+                                Data e ora (ultima rilevazione):
+                                <p id="data-firenze-time"></p>
+                                Indice di Qualità dell'Aria (AQI):
+                                <p id="data-firenze-aqi"></p>
+                                Livello Biossido di Azoto:
+                                <p id="data-firenze-iaqi"></p>
+                                Polveri grossolane:
+                                <p id="data-firenze-pm10"></p>
+                                Polveri fini:
+                                <p id="data-firenze-pm25"></p>
+                                Temperatura:
+                                <p id="data-firenze-t"></p>
+                                Pressione:
+                                <p id="data-firenze-p"></p>
+                                Umidità:
+                                <p id="data-firenze-h"></p>
+                                Vento:
+                                <p id="data-firenze-w"></p>
+                            </div>
+                                <button class="chiusura" id="chi"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                  </svg></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="città">
+                    <div class="foto-pisa">
+                        <div class="pisa"><strong>Pisa</strong><br/>
+                            <button type="button" class="collapsible"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                            </svg></button>
+                            <div class="content" id="c">
+                                <div class="cambiacli">.</div>
+                                <div class="dati">
+                                Data e ora (ultima rilevazione):
+                                <p id="data-pisa-time"></p>
+                                Indice di Qualità dell'Aria (AQI):
+                                <p id="data-pisa-aqi"></p>
+                                Livello Biossido di Azoto:
+                                <p id="data-pisa-iaqi"></p>
+                                Polveri grossolane:
+                                <p id="data-pisa-pm10"></p>
+                                Polveri fini:
+                                <p id="data-pisa-pm25"></p>
+                                Temperatura:
+                                <p id="data-pisa-t"></p>
+                                Pressione:
+                                <p id="data-pisa-p"></p>
+                                Umidità:
+                                <p id="data-pisa-h"></p>
+                                Vento:
+                                <p id="data-pisa-w"></p>
+                            </div>
+                                <button class="chiusura" id="ch"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                  </svg></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="foto-bologna">
+                        <div class="bologna"><strong>Bologna</strong><br/>
+                            <button type="button" class="collapsible"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                            </svg></button>
+                            <div class="content" id="contentt">
+                                <div class="cambiacli">.</div>
+                                <div class="dati">
+                                Data e ora (ultima rilevazione):
+                                <p id="data-bologna-time"></p>
+                                Indice di Qualità dell'Aria (AQI):
+                                <p id="data-bologna-aqi"></p>
+                                Livello Biossido di Azoto:
+                                <p id="data-bologna-iaqi"></p>
+                                Polveri grossolane:
+                                <p id="data-bologna-pm10"></p>
+                                Polveri fini:
+                                <p id="data-bologna-pm25"></p>
+                                Temperatura:
+                                <p id="data-bologna-t"></p>
+                                Pressione:
+                                <p id="data-bologna-p"></p>
+                                Umidità:
+                                <p id="data-bologna-h"></p>
+                                Vento:
+                                <p id="data-bologna-w"></p>
+                            </div>
+                                <button class="chiusura" id="chiusuraa"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                  </svg></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <section>
+                <div class="scr-condivisione">
+                    <strong>Condividi con i tuoi contatti per verificare i livelli nella loro città:</strong>
+                </div>
+                <div class="condivisione">
+                    <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a></div>
+                    <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+                    <script type="IN/Share" data-url="https://www.linkedin.com" value="Linkedin"></script>
+                    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                <!--per linkedin inserire link in data-url , per face inserire il link dopo //www.facebook.com/share.php?, per twitter cercare su internet forse da rifare pulsante-->
+                </div>
+            </section>
+        </article>  
+        <footer>
+            <div>&copy;2021 creato da: Matteo Bogino.</div>
+        </footer>
+        <script src="inquinamento.js"></script>
+    </body>
+</html>
