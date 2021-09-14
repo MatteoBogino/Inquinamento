@@ -178,6 +178,24 @@ header{
     right: 1%;
     ;
 }
+.descr-grafic{
+    text-align: center;
+    padding-top: 2%;
+    font-size: 20px;
+}
+#myChart{
+    padding: 2% 8% 0 8%;
+}
+.righegrafic{
+    text-align: center;
+    font-size: 20px;
+    padding-bottom: 5%;
+}
+.fonte{
+    text-align: right;
+    font-size: 12px;
+    padding: 1% 9% 2% 0;
+}
 .scr-condivisione{
     text-align: center;
     color: green;
@@ -194,9 +212,6 @@ header{
 }
 .twitter-share-button{
     margin-left: 2%;
-}
-#myChart{
-    padding: 5%;
 }
 footer{
     width: 100%;
@@ -257,9 +272,14 @@ footer{
       ::-webkit-scrollbar-thumb:hover {
         background: green; 
     }
-    footer{
-        position: absolute;
-        bottom: 0;
+    #myChart{
+        padding: 2%;
+    }
+    .fonte{
+        padding: 1% 4% 2% 0;
+    }
+    .righegrafic{
+        padding-bottom: 5%;
     }
 }
 @media screen and (max-width: 499px){
@@ -269,7 +289,7 @@ footer{
     
     .content{
         position: fixed!important;
-        top: 5%!important;
+        top: 2%!important;
     }
     .tutte-citta{
         display: flex;
@@ -312,5 +332,17 @@ footer{
     }
       ::-webkit-scrollbar-thumb:hover {
         background: green; 
+    }
+    #myChart{
+        padding: 2%;
+    }
+    .fonte{
+        text-align: right;
+        font-size: 10px;
+        padding: 1% 4% 2% 0;
+    }
+    .righegrafic{
+        font-size: 17px;
+        padding: 2% 2% 6% 2%;
     }
 }
