@@ -1,20 +1,22 @@
 const labels = [
-    'AQI (indice qualità aria)',
-    'Livello Biossido di Azoto',
-    'Polveri grossolane',
-    'Polveri fini',
+    '2015',
+    '2016',
+    '2017',
+    '2018',
+    '2019',
+    '2020',
 ];
 const dataa = {
     labels: labels,
     datasets: [{
-        label: 'Elementi inquinanti',
+        label: 'PM10 - Polveri fini',
         backgroundColor: 'rgb(7, 92, 7)',
         borderColor: 'rgb(7, 92, 7)',
-        data: [],
+        data: [5,1, 2.7, 0.8, 0.3, 0.5],
     }]
 };
 const config = {
-    type: 'bar',
+    type: 'line',
     data: dataa,
     options: {}
 };
@@ -23,6 +25,63 @@ var myChart = new Chart(
     config
 );
     
+function changeValue(dati){
+    if (!dati.time){
+        dati.time = {}
+    }
+    if (!dati.time.s){
+        dati.time.s = "/";
+    }
+    if (!dati.iaqi){
+        dati.iaqi = {}
+    }
+    if (!dati.iaqi.aqi){
+        dati.iaqi.aqi = "/";
+    }
+    if (!dati.iaqi.no2){
+        dati.iaqi.no2 = {}
+    }
+    if (!dati.iaqi.no2.v){
+        dati.iaqi.no2.v = "/";
+    }
+    if (!dati.iaqi.p){
+        dati.iaqi.p = {}
+    }
+    if (!dati.iaqi.p.v){
+        dati.iaqi.p.v = "/";
+    }
+    if (!dati.iaqi.h){
+        dati.iaqi.h = {}
+    }
+    if (!dati.iaqi.h.v){
+        dati.iaqi.h.v = "/";
+    }
+    if (!dati.iaqi.w){
+        dati.iaqi.w = {}
+    }
+    if (!dati.iaqi.w.v) {
+        dati.iaqi.w.v = "/";
+    }
+    if (!dati.iaqi.t){
+        dati.iaqi.t = {}
+    }
+    if (!dati.iaqi.t.v){
+        dati.iaqi.t.v = "/";
+    }
+    if (!dati.iaqi.pm10){
+        dati.iaqi.pm10 = {}
+    }
+    if (!dati.iaqi.pm10.v){
+        dati.iaqi.pm10.v = "/";
+    }
+    if (!dati.iaqi.pm25){
+        dati.iaqi.pm25 = {}
+    }
+    if (!dati.iaqi.pm25.v){
+        dati.iaqi.pm25.v = "/";
+    }
+    return dati;
+}
     
     //inizio cerca dati cerca
     let standardUrl="https://api.waqi.info/feed/";
@@ -34,6 +93,7 @@ var myChart = new Chart(
         httpReq.onload = function (res) {
             let response = res.target.response;
             let data = JSON.parse(response);
+            data.data = changeValue(data.data);
             document.getElementById('data-search-time').innerHTML = data.data.time.s;
             document.getElementById('data-search-aqi').innerHTML = data.data.aqi;
             document.getElementById('data-search-iaqi').innerHTML = data.data.iaqi.no2.v;
@@ -48,47 +108,15 @@ var myChart = new Chart(
         httpReq.send();
     });
     //fine cerca dati cerca
-
-    function value(dati){
-        if (!dati.iaqi.time.s){
-            dati.iaqi.time.s = "/";
-        }
-        if (!dati.iaqi.aqi){
-            dati.iaqi.aqi = "/";
-        }
-        if (!dati.iaqi.no2.v){
-            dati.iaqi.no2.v = "/";
-        }
-        if (!dati.iaqi.p.v){
-            dati.iaqi.p.v = "/";
-        }
-        if (!dati.iaqi.h.v){
-            dati.iaqi.h.v = "/";
-        }
-        if (!dati.iaqi.w.v){
-            dati.iaqi.w.v = "/";
-        }
-        if (!dati.iaqi.t.v){
-            dati.iaqi.t.v = "/";
-        }
-        if (!dati.iaqi.pm10.v){
-            dati.iaqi.pm10.v = "/";
-        }
-        if (!dati.iaqi.pm25.v){
-            dati.iaqi.pm25.v = "/";
-        }
-        return dati;
-    }
     
-    document.getElementById("collapsible").addEventListener("click", function(){
+    document.getElementById("collapsibleRoma").addEventListener("click", function(){
         let city= "roma";
         let url= standardUrl + city + token;
         let httpReq = new XMLHttpRequest(); 
         httpReq.onload = function (res) {
             let response = res.target.response;
             let data = JSON.parse(response);
-            dataa.datasets.data = data.data.aqi;
-            dataa.datasets.data = data.data.iaqi.no2.v;
+            data.data = changeValue(data.data);
             document.getElementById('data-roma-time').innerHTML = data.data.time.s;
             document.getElementById('data-roma-aqi').innerHTML = data.data.aqi;
             document.getElementById('data-roma-iaqi').innerHTML = data.data.iaqi.no2.v;
@@ -102,13 +130,14 @@ var myChart = new Chart(
         httpReq.open("GET",url,true);
         httpReq.send();
     });
-    document.getElementById("collapsible").addEventListener("click", function(){
-        let city= "milano";
-        let url= standardUrl + city + token;
+    document.getElementById("collapsibleMilano").addEventListener("click", function(){
+        let cityy= "milano";
+        let url= standardUrl + cityy + token;
         let httpReq = new XMLHttpRequest(); 
         httpReq.onload = function (res) {
             let response = res.target.response;
             let data = JSON.parse(response);
+            data.data = changeValue(data.data);
             document.getElementById('data-milano-time').innerHTML = data.data.time.s;
             document.getElementById('data-milano-aqi').innerHTML = data.data.aqi;
             document.getElementById('data-milano-iaqi').innerHTML = data.data.iaqi.no2.v;
@@ -122,13 +151,14 @@ var myChart = new Chart(
         httpReq.open("GET",url,true);
         httpReq.send();
     });
-    document.getElementById("collapsible").addEventListener("click", function(){
+    document.getElementById("collapsibleNapoli").addEventListener("click", function(){
         let city= "napoli";
         let url= standardUrl + city + token;
         let httpReq = new XMLHttpRequest(); 
         httpReq.onload = function (res) {
             let response = res.target.response;
             let data = JSON.parse(response);
+            data.data = changeValue(data.data);
             document.getElementById('data-napoli-time').innerHTML = data.data.time.s;
             document.getElementById('data-napoli-aqi').innerHTML = data.data.aqi;
             document.getElementById('data-napoli-iaqi').innerHTML = data.data.iaqi.no2.v;
@@ -142,13 +172,14 @@ var myChart = new Chart(
         httpReq.open("GET",url,true);
         httpReq.send();
     });
-    document.getElementById("collapsible").addEventListener("click", function(){
+    document.getElementById("collapsibleFirenze").addEventListener("click", function(){
         let city= "firenze";
         let url= standardUrl + city + token;
         let httpReq = new XMLHttpRequest(); 
         httpReq.onload = function (res) {
             let response = res.target.response;
             let data = JSON.parse(response);
+            data.data = changeValue(data.data);
             document.getElementById('data-firenze-time').innerHTML = data.data.time.s;
             document.getElementById('data-firenze-aqi').innerHTML = data.data.aqi;
             document.getElementById('data-firenze-iaqi').innerHTML = data.data.iaqi.no2.v;
@@ -162,13 +193,14 @@ var myChart = new Chart(
         httpReq.open("GET",url,true);
         httpReq.send();
     });
-    document.getElementById("collapsible").addEventListener("click", function(){
+    document.getElementById("collapsiblePisa").addEventListener("click", function(){
         let city= "pisa";
         let url= standardUrl + city + token;
         let httpReq = new XMLHttpRequest(); 
         httpReq.onload = function (res) {
             let response = res.target.response;
             let data = JSON.parse(response);
+            data.data = changeValue(data.data);
             document.getElementById('data-pisa-time').innerHTML = data.data.time.s;
             document.getElementById('data-pisa-aqi').innerHTML = data.data.aqi;
             document.getElementById('data-pisa-iaqi').innerHTML = data.data.iaqi.no2.v;
@@ -182,13 +214,14 @@ var myChart = new Chart(
         httpReq.open("GET",url,true);
         httpReq.send();
     });
-    document.getElementById("collapsible").addEventListener("click", function(){
+    document.getElementById("collapsibleBologna").addEventListener("click", function(){
         let city= "bologna";
         let url= standardUrl + city + token;
         let httpReq = new XMLHttpRequest(); 
         httpReq.onload = function (res) {
             let response = res.target.response;
             let data = JSON.parse(response);
+            data.data = changeValue(data.data);
             document.getElementById('data-bologna-time').innerHTML = data.data.time.s;
             document.getElementById('data-bologna-aqi').innerHTML = data.data.aqi;
             document.getElementById('data-bologna-iaqi').innerHTML = data.data.iaqi.no2.v;
