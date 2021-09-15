@@ -290,6 +290,8 @@ footer{
     .content{
         position: fixed!important;
         top: 2%!important;
+        bottom: 1%;
+        overflow-y: scroll;
     }
     .tutte-citta{
         display: flex;
@@ -320,7 +322,7 @@ footer{
         min-width: 300px;
     }
     ::-webkit-scrollbar {
-        width: 8px;
+        width: 0px;
         height: 8px;
     }
       ::-webkit-scrollbar-track {
