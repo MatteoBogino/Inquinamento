@@ -10,4 +10,5 @@ I linguaggi di programmazione utilizzati sono:
 -*CSS*  
 -*JavaScript*  
 
-Di seguito il link per poter provare l'applicazione:
+Di seguito il link per poter provare l'applicazione:  
+https://inquinamento.netlify.app/
